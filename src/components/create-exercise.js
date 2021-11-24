@@ -7,6 +7,12 @@ export default class CreateExercise extends Component {
   constructor(props) {
     super(props);
 
+    this.onChangeStudentname = this.onChangeStudentname.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeDuration = this.onChangeDuration.bind(this);
+    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       studentname: "",
       description: "",
@@ -18,7 +24,7 @@ export default class CreateExercise extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/users/")
+      .get("http://localhost:5000/students/")
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
@@ -37,21 +43,25 @@ export default class CreateExercise extends Component {
       studentname: e.target.value,
     });
   }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
     });
   }
+
   onChangeDate(e) {
     this.setState({
       date: this.state.date,
     });
   }
+
   onChangeDuration(e) {
     this.setState({
       duration: e.target.value,
     });
   }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -74,12 +84,12 @@ export default class CreateExercise extends Component {
       <div>
         <h3>Create New Exercise Log</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="from-group">
-            <label> Username: </label>
+          <div className="form-group pt-4 pb-4">
+            <label>Studentname: </label>
             <select
               ref="studentInput"
               required
-              className="from-control"
+              className="form-control"
               value={this.state.studentname}
               onChange={this.onChangeStudentname}
             >
@@ -92,7 +102,7 @@ export default class CreateExercise extends Component {
               })}
             </select>
           </div>
-          <div className="form-group">
+          <div className="form-group pb-4">
             <label> Description: </label>
             <input
               type="text"
@@ -102,16 +112,16 @@ export default class CreateExercise extends Component {
               onChange={this.onChangeDescription}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group pb-4">
             <label>Duration (in minutes): </label>
             <input
               type="text"
               className="form-control"
               value={this.state.duration}
-              onChange={this.onChangeDescription}
+              onChange={this.onChangeDuration}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group pb-4">
             <label>Date: </label>
             <div>
               <DatePicker

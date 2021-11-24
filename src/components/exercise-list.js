@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BsTrash } from "react-icons/bs";
 
 const Exercise = (props) => (
   <tr>
@@ -9,15 +10,15 @@ const Exercise = (props) => (
     <td>{props.exercise.duration}</td>
     <td>{props.exercise.date.substring(0, 10)}</td>
     <td>
-      <Link to={"/edit/" + props.exercise._id}>edit</Link> |{" "}
-      <a
-        href="#"
+      <Link to={"/edit/" + props.exercise._id}>edit</Link> |
+      <button
+        className=" btn btn-danger btn-sm bg-gradient text-white rounded-2"
         onClick={() => {
           props.deleteExercise(props.exercise._id);
         }}
       >
-        delete
-      </a>
+        <BsTrash />
+      </button>
     </td>
   </tr>
 );
@@ -67,7 +68,7 @@ export default class ExercisesList extends Component {
   render() {
     return (
       <div>
-        <h3>Logged Exercises</h3>
+        <h3 className="pb-3 pt-3">Logged Exercises</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>

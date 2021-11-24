@@ -1,16 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from 'react'
 
-export default class Editexercise extends Component {
-  static propTypes = {
-    prop: PropTypes,
-  };
-
-  render() {
+function editExercise() {
     return (
-      <div>
-        <h1>Edit exercise</h1>
-      </div>
-    );
-  }
+        <div>
+            <h1>Hello from eDiting</h1>
+        </div>
+    )
 }
+
+export default editExercise
+

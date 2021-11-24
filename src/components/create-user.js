@@ -23,9 +23,11 @@ export default class CreateUser extends Component {
     const student = {
       studentname: this.state.studentname,
     };
+
     console.log(student);
+
     axios
-      .post("http://localhost:5000/user/add", student)
+      .post("http://localhost:5000/users/add", student)
       .then((res) => console.log(res.data));
 
     this.setState({
@@ -48,7 +50,7 @@ export default class CreateUser extends Component {
           />
           <div className="form-group">
             <input
-              type="text"
+              type="submit"
               value="Create Student"
               className="btn btn-primary"
             />
