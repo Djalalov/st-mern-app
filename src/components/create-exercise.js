@@ -67,8 +67,8 @@ export default class CreateExercise extends Component {
 
     const exercise = {
       studentname: this.state.studentname,
-      duration: this.state.duration,
       description: this.state.description,
+      duration: this.state.duration,
       date: this.state.date,
     };
     console.log(exercise);

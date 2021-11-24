@@ -7,10 +7,10 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("./add").post((req, res) => {
+router.route("/add").post((req, res) => {
   const studentname = req.body.studentname;
   const description = req.body.description;
-  const duration = req.body.duration;
+  const duration = Number(req.body.duration);
   const date = Date.parse(req.body.date);
 
   const newExercise = new Exercise({
