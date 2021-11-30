@@ -44,9 +44,7 @@ export default class ExercisesList extends Component {
       .then((response) => {
         this.setState({ exercises: response.data });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((err) => console.log(err));
   }
 
   deleteExercise(id) {

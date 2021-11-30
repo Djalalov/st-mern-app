@@ -38,31 +38,31 @@ export default class CreateExercise extends Component {
       });
   }
 
-  onChangeStudentname(e) {
+  onChangeStudentname = (e) => {
     this.setState({
       studentname: e.target.value,
     });
-  }
+  };
 
-  onChangeDescription(e) {
+  onChangeDescription = (e) => {
     this.setState({
       description: e.target.value,
     });
-  }
+  };
 
-  onChangeDuration(e) {
+  onChangeDuration = (e) => {
     this.setState({
       duration: e.target.value,
     });
-  }
+  };
 
-  onChangeDate(date) {
+  onChangeDate = (date) => {
     this.setState({
       date: date,
     });
-  }
+  };
 
-  onSubmit(e) {
+  onSubmit = async (e) => {
     e.preventDefault();
 
     const exercise = {
@@ -72,21 +72,24 @@ export default class CreateExercise extends Component {
       date: this.state.date,
     };
 
-    axios
-      .post("http://localhost:5000/exercises/add", exercise)
-      .then((res) => console.log(res.data))
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        }
-      });
-
     console.log(exercise);
 
+    try {
+      const resp = await axios.post(
+        "http://localhost:5000/exercises/add",
+        exercise
+      );
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    /* axios
+      .post("http://localhost:5000/exercises/add", exercise)
+      .then((res) => console.log(res.data)); */
+
     window.location = "/";
-  }
+  };
 
   render() {
     return (
