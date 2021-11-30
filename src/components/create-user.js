@@ -27,7 +27,7 @@ export default class CreateUser extends Component {
     console.log(student);
 
     axios
-      .post("http://localhost:5000/users/add", student)
+      .post("http://localhost:5000/students/add", student)
       .then((res) => console.log(res.data));
 
     this.setState({
@@ -39,15 +39,17 @@ export default class CreateUser extends Component {
     return (
       <div>
         <h3>Create New Student </h3>
-        <form className="form-group">
-          <label>Studentname: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={this.state.studentname}
-            onChange={this.onChangeStudentName}
-          />
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Studentname: </label>
+            <input
+              type="text"
+              required
+              className="form-control"
+              value={this.state.studentname}
+              onChange={this.onChangeStudentName}
+            />
+          </div>
           <div className="form-group">
             <input
               type="submit"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BsTrash } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 const Exercise = (props) => (
   <tr>
@@ -10,9 +11,14 @@ const Exercise = (props) => (
     <td>{props.exercise.duration}</td>
     <td>{props.exercise.date.substring(0, 10)}</td>
     <td>
-      <Link to={"/edit/" + props.exercise._id}>edit</Link> |
+      <Link
+        className="btn btn-warning btn-sm bg-gradient text-white rounded-2"
+        to={"/edit/" + props.exercise._id}
+      >
+        <FaEdit />
+      </Link>
       <button
-        className=" btn btn-danger btn-sm bg-gradient text-white rounded-2"
+        className="btn btn-danger btn-sm bg-gradient text-white rounded-2 mx-2"
         onClick={() => {
           props.deleteExercise(props.exercise._id);
         }}
