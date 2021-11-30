@@ -10,7 +10,7 @@ import CreateUser from "./components/create-user";
 
 function App() {
   return (
-    <div className="container">
+    <div>
       <Navbar />
       <br />
       <Routes>

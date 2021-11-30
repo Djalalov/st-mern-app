@@ -16,7 +16,7 @@ export default class CreateExercise extends Component {
     this.state = {
       studentname: "",
       description: "",
-      duration: "",
+      duration: 0,
       date: new Date(),
       students: [],
     };
@@ -50,15 +50,15 @@ export default class CreateExercise extends Component {
     });
   }
 
-  onChangeDate(e) {
-    this.setState({
-      date: this.state.date,
-    });
-  }
-
   onChangeDuration(e) {
     this.setState({
       duration: e.target.value,
+    });
+  }
+
+  onChangeDate(date) {
+    this.setState({
+      date: date,
     });
   }
 
@@ -71,11 +71,13 @@ export default class CreateExercise extends Component {
       duration: this.state.duration,
       date: this.state.date,
     };
+
     console.log(exercise);
 
     axios
       .post("http://localhost:5000/exercises/add", exercise)
       .then((res) => console.log(res.data));
+
     window.location = "/";
   }
 
@@ -84,7 +86,7 @@ export default class CreateExercise extends Component {
       <div>
         <h3>Create New Exercise Log</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group pt-4 pb-4">
+          <div className="form-group">
             <label>Studentname: </label>
             <select
               ref="studentInput"
@@ -96,14 +98,14 @@ export default class CreateExercise extends Component {
               {this.state.students.map(function (student) {
                 return (
                   <option key={student} value={student}>
-                    {student}{" "}
+                    {student}
                   </option>
                 );
               })}
             </select>
           </div>
-          <div className="form-group pb-4">
-            <label> Description: </label>
+          <div className="form-group">
+            <label>Description: </label>
             <input
               type="text"
               required
@@ -112,7 +114,7 @@ export default class CreateExercise extends Component {
               onChange={this.onChangeDescription}
             />
           </div>
-          <div className="form-group pb-4">
+          <div className="form-group">
             <label>Duration (in minutes): </label>
             <input
               type="text"
@@ -121,7 +123,7 @@ export default class CreateExercise extends Component {
               onChange={this.onChangeDuration}
             />
           </div>
-          <div className="form-group pb-4">
+          <div className="form-group">
             <label>Date: </label>
             <div>
               <DatePicker
@@ -130,6 +132,7 @@ export default class CreateExercise extends Component {
               />
             </div>
           </div>
+
           <div className="form-group">
             <input
               type="submit"

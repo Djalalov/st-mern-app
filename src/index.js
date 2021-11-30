@@ -5,7 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 
 const element = (
   <BrowserRouter>
-    <App />
+    <div className="container">
+      <App />
+    </div>
   </BrowserRouter>
 );
 
