@@ -72,22 +72,12 @@ export default class CreateExercise extends Component {
       date: this.state.date,
     };
 
-    console.log(exercise);
-
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/exercises/add",
-        exercise
-      );
-      console.log(resp.data);
+      await axios.post("http://localhost:5000/exercises/add", exercise);
     } catch (error) {
       console.log(error);
     }
-
-    /* axios
-      .post("http://localhost:5000/exercises/add", exercise)
-      .then((res) => console.log(res.data)); */
-
+    console.log(exercise);
     window.location = "/";
   };
 

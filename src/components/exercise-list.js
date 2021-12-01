@@ -74,8 +74,8 @@ export default class ExercisesList extends Component {
       <div>
         <h3 className="pb-3 pt-3">Logged Exercises</h3>
         <table className="table">
-          <thead className="thead-light">
-            <tr>
+          <thead className="bg-dark bg-gradient text-white">
+            <tr className="">
               <th>Studentname</th>
               <th>Description</th>
               <th>Duration</th>
