@@ -1,4 +1,4 @@
-# st-mern-app
+# st-Reg-form (MERN stack)
 
 ##Student Registration MERN stack App
 
