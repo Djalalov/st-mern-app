@@ -7,7 +7,6 @@ const studentSchema = new Schema(
     firstName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       minLength: true,
     },
@@ -27,7 +26,6 @@ const studentSchema = new Schema(
     level: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     analysis: {

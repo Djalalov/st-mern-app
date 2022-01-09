@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+///////////////////////INITIALIZATION OF STATES ////////////////
 const CreateStudent = () => {
   const [values, setValues] = useState({
     firstName: "",
@@ -11,69 +12,71 @@ const CreateStudent = () => {
     level: "",
     date: new Date(),
   });
-  const [loading, setLoading] = useState(false);
 
-  const marketingData = [
-    { id: 0, value: "Telegram" },
-    { id: 1, value: "Instagram" },
-    { id: 2, value: "Banner" },
-    { id: 3, value: "Friend" },
-    { id: 4, value: "WebSite" },
-  ];
+  const [analysis, setAnalysis] = useState("");
+  const { firstName, lastName, studentID, level, date } = values;
 
-  const [analysis, setAnalysis] = useState([]);
+  ////////////////////LOADING FUNCTION STARTS/////////////////////
 
-  useEffect(() => {
-    setAnalysis(marketingData);
-  }, []);
+  const showLoading = () => {
+    loading ? <div className="alert alert-info">Loading...</div> : "";
+  };
 
-  console.log(analysis);
+  const showSuccess = () => {
+    success ? (
+      <div className="alert alert-success"> Student Successfully created. </div>
+    ) : (
+      ""
+    );
+  };
 
-  const onSubmit = async (e) => {
+  const showFailed = () => {
+    failed ? <div className="alert alert-danger">StudentLoading...</div> : "";
+  };
+  ///////////////MARKETING ANALYSIS STARTS//////////////////////////////
+
+  ////////////////// SUBMITTING THE FORM //////////////////////////////////
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     showLoading();
-
-    const { firstName, lastName, studentID, level, date } = values;
-
     const student = {
       firstName,
       lastName,
       studentID,
-      level,
       analysis,
+      level,
       date,
     };
 
     try {
       await axios.post("http://localhost:5000/students/add", student);
-
       console.log(student);
+      showSuccess();
+      window.location = "/create-student";
 
-      firstName("");
+      /*   firstName("");
       lastName("");
       studentID(0);
       level("");
-      analysis("");
-      date(null);
-
-      setLoading(false);
+      date(null); */
     } catch (error) {
       console.log(error);
+      showFailed();
     }
   };
+
+  //////////////////////////// HANDLING CHANGES ///////////////////////////
 
   const handleChange = (data) => (e) => {
     setValues({ ...values, [data]: e.target.value });
   };
 
-  const showLoading = () =>
-    loading ? <div className="alert alert-info">Loading...</div> : "";
-
   const createForm = () => {
     return (
       <div>
         <h3>Create New Student </h3>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="form-group pt-4">
             <label htmlFor="firstname">Firstname: </label>
             <input
@@ -116,15 +119,24 @@ const CreateStudent = () => {
 
             <div className="form-group pt-4">
               <label htmlFor="analysis">Analysis: </label>
-              <select className="form-control">
-                {analysis.map((info, index) => (
-                  <option key={info.id}>{info.value}</option>
-                ))}
+              <select
+                className="form-control ps-0"
+                onChange={(e) => {
+                  const selectedOption = e.target.value;
+                  setAnalysis(selectedOption);
+                }}
+              >
+                <option value="Telegram">Telegram</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Banner">Banner</option>
+                <option value="Friends">Friends</option>
               </select>
 
               <div className="form-group pt-4">
                 <label htmlFor="date">Date: </label>
                 <DatePicker
+                  value={values.date}
                   selected={values.date}
                   onChange={handleChange("date")}
                 />
@@ -143,7 +155,7 @@ const CreateStudent = () => {
     );
   };
 
-  return <React.Fragment>{createForm()}</React.Fragment>;
+  return <>{createForm()}</>;
 };
 
 export default CreateStudent;
